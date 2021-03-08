@@ -34,13 +34,13 @@
                 </div>
             </div>
         </nav>
-        <!-- Books Grid-->
+        <!-- Authors Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
                     <br>
                     <h2 class="section-heading text-uppercase">Authors</h2>
-                    <h3 class="section-subheading text-muted">Know more about the authors.</h3>
+                    <h3 class="section-subheading text-muted">Know more about the great writers.</h3>
                 </div>
                 <div class="row">
                     <%for(let i = 0; i < authors.length; i++){%>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </footer>
-        <!-- Single book-->
+        <!-- Single author-->
         <%for(let i = 0; i < authors.length; i++){%>
             <div class="portfolio-modal modal fade" id="author<%=i%>" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -89,7 +89,6 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <div class="modal-body">
-                                        <!-- Project Details Go Here-->
                                         <h2 class="text-uppercase"><%=authors[i].name%></h2>
                                         <br>
                                         <img class="img-fluid d-block mx-auto" src="<%=authors[i].img%>" alt="" />
@@ -118,9 +117,9 @@
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
+        <script src="/js/jqBootstrapValidation.js"></script>
+        <script src="/js/contact_me.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="/js/scripts.js"></script>
     </body>
 </html>

@@ -20,7 +20,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#"><img src="/images/navbar-logo.svg" alt="" /></a>
+                <a class="navbar-brand js-scroll-trigger" href="/"><img src="/images/navbar-logo.svg" alt="" /></a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ml-1"></i>
@@ -34,43 +34,43 @@
                 </div>
             </div>
         </nav>
-        <!-- Masthead-->
-        <header class="masthead">
+        <!-- Contact-->
+        <section class="page-section" id="add">
             <div class="container">
-                <div class="masthead-subheading">Reading is dreaming with open eyes!</div>
-                <div class="masthead-heading text-uppercase">Welcome to the world of books</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#about">Tell Me More</a>
-            </div>
-        </header>
-        <!-- About-->
-        <section class="page-section bg-primary text-white mb-0" id="about">
-            <div class="container">
-                <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
+                <br>
+                <br>
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Add New Book</h2>
+                    <h3 class="section-subheading text-muted">Enter details of new book.</h3>
                 </div>
-                <!-- About Section Content-->
-                <div class="row">
-                    <div class="col-lg-4 ml-auto">
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Blanditiis veritatis asperiores non quasi ratione earum possimus nam ea,
-                            tempora similique. Pariatur sed soluta fugit voluptatibus inventore
-                            accusantium ex dicta. Deleniti.
-                        </p>
+                <form id="addForm" name="addBook" novalidate="novalidate">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" id="title" type="text" placeholder="Title *" required="required" data-validation-required-message="Please enter book title." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="author" type="text" placeholder="Author *" required="required" data-validation-required-message="Please enter auther name." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <input class="form-control" id="genre" type="text" placeholder="Genre *" required="required" data-validation-required-message="Please enter book genre." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <textarea class="form-control" id="description" placeholder="Description *" required="required" data-validation-required-message="Please enter a short description."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4 mr-auto">
-                        <p class="lead">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                            Vero esse cupiditate et itaque a natus, ea non culpa atque unde fugit ad?
-                            Quas iusto enim id, quaerat possimus facilis animi!
-                        </p>
+                    <div class="text-center">
+                        <div id="success"></div>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="addBookButton" type="submit">Add</button>
                     </div>
-                </div>
+                </form>
             </div>
         </section>
         <!-- Footer-->
@@ -99,6 +99,6 @@
         <script src="/js/jqBootstrapValidation.js"></script>
         <script src="/js/contact_me.js"></script>
         <!-- Core theme JS-->
-        <script src="/js/scripts.js"></script>
+        <script src="/js/scripts.js"></script>        
     </body>
 </html>

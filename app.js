@@ -3,7 +3,11 @@ const app = express();
 
 const nav = [
     {link:'/books', name:'Books'},
-    {link:'/authors', name:'Authors'}
+    {link:'/authors', name:'Authors'},
+    {link:'/books/add-book', name:'Add New Book'},
+    {link:'/authors/add-author', name:'Add New Author'},
+    {link:'/signin', name:'Sign in'},
+    {link:'/signup', name:'Sign up'}
 ]
 
 const booksRouter = require('./src/routes/booksRoutes')(nav);

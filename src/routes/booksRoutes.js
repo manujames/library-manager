@@ -43,6 +43,13 @@ router = (nav)=>{
     //         title: `Library Manager | ${books[req.params.id].title}`
     //     });
     // });
+    booksRouter.get('/add-book', (req,res)=>{
+        res.render('addBook',
+        {
+            nav,
+            title: 'Library Manager | Add New Book'
+        });
+    });
     return booksRouter;
 }
 

@@ -5,7 +5,7 @@ router = (nav)=>{
     const authors = [
         {
             name: 'Joseph Barbera',
-            books: 'Tom and Jerry, My Life in Toons: From Flatbush to Bedrock in Under a Century, ',
+            books: 'Tom and Jerry, My Life in Toons: From Flatbush to Bedrock in Under a Century',
             description: "Joseph Roland Barbera was an American animator, director, producer, storyboard artist, and cartoon artist, whose film and television cartoon characters entertained millions of fans worldwide for much of the 20th century.",
             img:'/images/authors/joseph-barbera.jpg'
         },
