@@ -1,0 +1,23 @@
+{
+  "name": "library-manager",
+  "version": "1.0.0",
+  "description": "Library manager app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manujames/library-manager.git"
+  },
+  "author": "manu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manujames/library-manager/issues"
+  },
+  "homepage": "https://github.com/manujames/library-manager#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  }
+}
