@@ -10148,6 +10148,7 @@ img::-moz-selection {
 header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
+  height: 100vh;
   text-align: center;
   color: #fff;
   background-image: url("/images/header-bg.jpg");
