@@ -10237,9 +10237,24 @@ header.masthead .masthead-heading {
 .portfolio-modal .modal-dialog {
   margin: 1rem;
   max-width: 100vw;
-  padding-left: 20vw;
-  padding-right: 20vw;
 }
+
+@media (min-width: 768px) {
+  .portfolio-modal .modal-dialog {
+    max-width: 100vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+}
+
+@media (min-width: 992px) {
+  .portfolio-modal .modal-dialog {
+    max-width: 100vw;
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+}
+
 .portfolio-modal .modal-content {
   padding-top: 6rem;
   padding-bottom: 6rem;
@@ -10457,55 +10472,69 @@ header.masthead .masthead-heading {
   margin-bottom: 0;
 }
 
-section#add {
+section#addBook,
+section#addAuthor {
   background-color: #212529;
-  background-image: url("/images/map-image.png");
+  /* background-image: url("/images/map-image.png"); */
   background-repeat: no-repeat;
   background-position: center;
 }
-section#add .section-heading {
+section#addBook .section-heading,
+section#addAuthor .section-heading {
   color: #fff;
 }
-section#add form#addForm .form-group {
+section#addBook form#addBookForm .form-group,
+section#addAuthor form#addAuthorForm .form-group {
   margin-bottom: 1.5rem;
 }
-section#add form#addForm .form-group input,
-section#add form#addForm .form-group textarea {
+section#addBook form#addBookForm .form-group input,
+section#addBook form#addBookForm .form-group textarea,
+section#addAuthor form#addAuthorForm .form-group input,
+section#addAuthor form#addAuthorForm .form-group textarea {
   padding: 1.25rem;
 }
-section#add form#addForm .form-group input.form-control {
+section#addBook form#addBookForm .form-group input.form-control,
+section#addAuthor form#addAuthorForm .form-group input.form-control {
   height: auto;
 }
-section#add form#addForm .form-group-textarea {
+section#addBook form#addBookForm .form-group-textarea,
+section#addAuthor form#addAuthorForm .form-group-textarea {
   height: 100%;
 }
-section#add form#addForm .form-group-textarea textarea {
+section#addBook form#addBookForm .form-group-textarea textarea,
+section#addAuthor form#addAuthorForm .form-group-textarea textarea {
   height: 100%;
   min-height: 10rem;
 }
-section#add form#addForm p.help-block {
+section#addBook form#addBookForm p.help-block,
+section#addAuthor form#addAuthorForm p.help-block {
   margin: 0;
 }
-section#add form#addForm .form-control:focus {
+section#addBook form#addBookForm .form-control:focus,
+section#addAuthor form#addAuthorForm .form-control:focus {
   border-color: #fed136;
   box-shadow: none;
 }
-section#add form#addForm ::-webkit-input-placeholder {
+section#addBook form#addBookForm ::-webkit-input-placeholder,
+section#addAuthor form#addAuthorForm ::-webkit-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
 }
-section#add form#addForm :-moz-placeholder {
+section#addBook form#addBookForm :-moz-placeholder,
+section#addAuthor form#addAuthorForm :-moz-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
 }
-section#add form#addForm ::-moz-placeholder {
+section#addBook form#addBookForm ::-moz-placeholder,
+section#addAuthor form#addAuthorForm ::-moz-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
 }
-section#add form#addForm :-ms-input-placeholder {
+section#addBook form#addBookForm :-ms-input-placeholder,
+section#addAuthor form#addAuthorForm :-ms-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;

@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({extended:true}));
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 const nav = [
     {link:'/books', name:'Books'},
     {link:'/authors', name:'Authors'},
@@ -12,7 +17,6 @@ const nav = [
 
 const booksRouter = require('./src/routes/booksRoutes')(nav);
 const authorsRouter = require('./src/routes/authorsRoutes')(nav);
-
 
 app.use(express.static('./public'));
 app.set('view engine','ejs');

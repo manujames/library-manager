@@ -35,7 +35,7 @@
             </div>
         </nav>
         <!-- Add book-->
-        <section class="page-section" id="add">
+        <section class="page-section" id="addBook">
             <div class="container">
                 <br>
                 <br>
@@ -43,25 +43,28 @@
                     <h2 class="section-heading text-uppercase">Add New Book</h2>
                     <h3 class="section-subheading text-muted">Enter details of new book.</h3>
                 </div>
-                <form id="addForm" name="addBook" action="/books/add-book" method="POST" novalidate=true>
+                <form id="addBookForm" name="addBookForm" action="/books/add-book" method="POST" novalidate=true>
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" id="title" type="text" placeholder="Title *" required="required" data-validation-required-message="Please enter book title." />
+                                <input class="form-control" id="title" name="title" type="text" placeholder="Title *" required="required" data-validation-required-message="Please enter book title." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="author" type="text" placeholder="Author *" required="required" data-validation-required-message="Please enter auther name." />
+                                <input class="form-control" id="author" name="author" type="text" placeholder="Author *" required="required" data-validation-required-message="Please enter auther name." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="genre" name="genre" type="text" placeholder="Genre *" required="required" data-validation-required-message="Please enter book genre." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="genre" type="text" placeholder="Genre *" required="required" data-validation-required-message="Please enter book genre." />
-                                <p class="help-block text-danger"></p>
+                                <input class="form-control" id="img" name="img" type="text" placeholder="Image url"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="description" placeholder="Description *" required="required" data-validation-required-message="Please enter a short description."></textarea>
+                                <textarea class="form-control" id="description" name="description" placeholder="Description *" required="required" data-validation-required-message="Please enter a short description."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -95,9 +98,18 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
+        <!-- Form validation JS-->
         <script src="/js/jqBootstrapValidation.js"></script>
-        <script src="/js/contact_me.js"></script>
+        <script>
+            $(function () {
+                $("#addBookForm input,#addBookForm textarea,#addBookForm button").jqBootstrapValidation();
+            });
+
+            /*When clicking on inputs hide fail/success boxes */
+            $("#title").focus(function () {
+                $("#success").html("");
+            });
+        </script>
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>        
     </body>

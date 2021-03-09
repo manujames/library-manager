@@ -32,14 +32,18 @@ router = (nav)=>{
         });
     });
 
-    // authorsRouter.get('/:id', (req,res)=>{
-    //     res.render('author',
-    //     {
-    //         nav,
-    //         author: authors[req.params.id],
-    //         name: `Library Manager | ${authors[req.params.id].name}`
-    //     });
-    // });
+    authorsRouter.get('/add-author', (req,res)=>{
+        res.render('addAuthor',
+        {
+            nav,
+            title: 'Library Manager | Add New Author'
+        });
+    });
+    authorsRouter.post('/add-author', (req,res)=>{
+        let newAuthor = req.body;
+        authors.push(newAuthor);
+        res.redirect('/authors');
+    });
     return authorsRouter;
 }
 

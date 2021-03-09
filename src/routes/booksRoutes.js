@@ -1,12 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
 
-// Parse URL-encoded bodies (as sent by HTML forms)
-booksRouter.use(express.urlencoded());
-
-// Parse JSON bodies (as sent by API clients)
-booksRouter.use(express.json());
-
 router = (nav)=>{
     const books = [
         {
@@ -40,15 +34,6 @@ router = (nav)=>{
             title: 'Library Manager | Books'
         });
     });
-
-    // booksRouter.get('/:id', (req,res)=>{
-    //     res.render('book',
-    //     {
-    //         nav,
-    //         book: books[req.params.id],
-    //         title: `Library Manager | ${books[req.params.id].title}`
-    //     });
-    // });
     booksRouter.get('/add-book', (req,res)=>{
         res.render('addBook',
         {
@@ -57,12 +42,9 @@ router = (nav)=>{
         });
     });
     booksRouter.post('/add-book', (req,res)=>{
-        console.log(req.body);
-        res.render('addBook',
-        {
-            nav,
-            title: 'Library Manager | Add New Book'
-        });
+        let newBook = req.body;
+        books.push(newBook);
+        res.redirect('/books');
     });
     return booksRouter;
 }
