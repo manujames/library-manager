@@ -159,12 +159,12 @@ sup {
 }
 
 a {
-  color: #fed136;
+  color: #186793;
   text-decoration: none;
   background-color: transparent;
 }
 a:hover {
-  color: #e6b301;
+  color: #184461;
   text-decoration: underline;
 }
 
@@ -2554,6 +2554,36 @@ fieldset:disabled a.btn {
 }
 .btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus, .show > .btn-info.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+}
+
+.btn-theme {
+  color: #fff;
+  background-color: #184461;
+  border-color: #184461;
+}
+.btn-theme:hover {
+  color: #fff;
+  background-color: #031c2c;
+  border-color: #011420;
+}
+.btn-theme:focus, .btn-theme.focus {
+  color: #fff;
+  background-color: #031c2c;
+  border-color: #011420;
+  box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+}
+.btn-theme.disabled, .btn-theme:disabled {
+  color: #fff;
+  background-color: #184461;
+  border-color: #184461;
+}
+.btn-theme:not(:disabled):not(.disabled):active, .btn-theme:not(:disabled):not(.disabled).active, .show > .btn-theme.dropdown-toggle {
+  color: #fff;
+  background-color: #011420;
+  border-color: #00111b;
+}
+.btn-theme:not(:disabled):not(.disabled):active:focus, .btn-theme:not(:disabled):not(.disabled).active:focus, .show > .btn-theme.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(16, 53, 77, 0.5);
 }
 
 .btn-warning {
@@ -10472,69 +10502,62 @@ header.masthead .masthead-heading {
   margin-bottom: 0;
 }
 
-section#addBook,
-section#addAuthor {
+section.input-section-bg-dark{
   background-color: #212529;
-  background-image: url("/images/map-image.png");
-  background-repeat: no-repeat;
-  background-position: center;
+  /* background-image: url("/images/map-image.png"); */
+  background-image: url("/images/form-bg.png");
 }
-section#addBook .section-heading,
-section#addAuthor .section-heading {
+
+section.input-section-bg-theme{
+  background-color: #186793;
+  background-image: url("/images/form-bg.png");
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+}
+
+section.input-section .section-heading {
   color: #fff;
 }
-section#addBook form#addBookForm .form-group,
-section#addAuthor form#addAuthorForm .form-group {
+section.input-section form.input-form .form-group {
   margin-bottom: 1.5rem;
 }
-section#addBook form#addBookForm .form-group input,
-section#addBook form#addBookForm .form-group textarea,
-section#addAuthor form#addAuthorForm .form-group input,
-section#addAuthor form#addAuthorForm .form-group textarea {
+section.input-section form.input-form .form-group input,
+section.input-section form.input-form .form-group textarea {
   padding: 1.25rem;
 }
-section#addBook form#addBookForm .form-group input.form-control,
-section#addAuthor form#addAuthorForm .form-group input.form-control {
+section.input-section form.input-form .form-group input.form-control {
   height: auto;
 }
-section#addBook form#addBookForm .form-group-textarea,
-section#addAuthor form#addAuthorForm .form-group-textarea {
+section.input-section form.input-form .form-group-textarea {
   height: 100%;
 }
-section#addBook form#addBookForm .form-group-textarea textarea,
-section#addAuthor form#addAuthorForm .form-group-textarea textarea {
+section.input-section form.input-form .form-group-textarea textarea {
   height: 100%;
   min-height: 10rem;
 }
-section#addBook form#addBookForm p.help-block,
-section#addAuthor form#addAuthorForm p.help-block {
+section.input-section form.input-form p.help-block {
   margin: 0;
 }
-section#addBook form#addBookForm .form-control:focus,
-section#addAuthor form#addAuthorForm .form-control:focus {
+section.input-section form.input-form .form-control:focus {
   border-color: #fed136;
   box-shadow: none;
 }
-section#addBook form#addBookForm ::-webkit-input-placeholder,
-section#addAuthor form#addAuthorForm ::-webkit-input-placeholder {
+section.input-section form.input-form ::-webkit-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
 }
-section#addBook form#addBookForm :-moz-placeholder,
-section#addAuthor form#addAuthorForm :-moz-placeholder {
+section.input-section form.input-form :-moz-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
 }
-section#addBook form#addBookForm ::-moz-placeholder,
-section#addAuthor form#addAuthorForm ::-moz-placeholder {
+section.input-section form.input-form ::-moz-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
 }
-section#addBook form#addBookForm :-ms-input-placeholder,
-section#addAuthor form#addAuthorForm :-ms-input-placeholder {
+section.input-section form.input-form :-ms-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;

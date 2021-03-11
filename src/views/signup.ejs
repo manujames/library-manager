@@ -35,39 +35,49 @@
             </div>
         </nav>
         <!-- Add book-->
-        <section class="page-section input-section input-section-bg-dark" id="addAuthor">
+        <section class="page-section input-section input-section-bg-theme" id="addBook">
             <div class="container">
                 <br>
                 <br>
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Add New Author</h2>
-                    <h3 class="section-subheading text-muted">Enter details of author.</h3>
+                    <h2 class="section-heading text-uppercase">Sign up</h2>
+                    <br>
+                    <!-- <h3 class="section-subheading text-muted">Enter details of new book.</h3> -->
                 </div>
-                <form id="addAuthorForm" name="addAuthorForm" class="input-form" action="/authors/add-author" method="POST" novalidate=true>
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
+                <form id="signupForm" name="signupForm" class="input-form" action="/accounts/signup" method="POST" novalidate=true>
+                    <div class="row align-items-stretch mb-5 d-flex-inline justify-content-around flex-md-row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input class="form-control" id="fname" name="fname" type="text" placeholder="First name *" required="required" data-validation-required-message="Please enter your first name." />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <input class="form-control" id="sname" name="sname" type="text" placeholder="Second name *" required="required" data-validation-required-message="Please enter your second name." />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
-                                <input class="form-control" id="name" name="name" type="text" placeholder="Name *" required="required" data-validation-required-message="Please enter author's name." />
+                                <input class="form-control" id="email" name="email" type="email" placeholder="Email id *" required="required" data-validation-required-message="Please enter your email id." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="a_books" name="books" type="text" placeholder="Major works *" required="required" data-validation-required-message="Please enter popular works by the author." />
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Password *" required="required" data-validation-required-message="Please enter a password." />
                                 <p class="help-block text-danger"></p>
                             </div>
-                            <div class="form-group mb-md-0">
-                                <input class="form-control" id="img" name="img" type="text" placeholder="Image url"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="description" name="description" placeholder="About author *" required="required" data-validation-required-message="Please enter a short description about the author."></textarea>
+                            <div class="form-group">
+                                <input class="form-control" id="repeatPassword" name="repeatPassword" type="password" placeholder="Repeat password *" required="required" data-validation-required-message="Please repeat your password." />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
                         <div id="success"></div>
-                        <button class="btn btn-primary btn-xl text-uppercase" id="addAuthorButton" type="submit">Add</button>
+                        <button class="btn btn-theme btn-xl text-uppercase" id="signupButton" type="submit">Sign up</button>
                     </div>
                 </form>
             </div>
@@ -98,11 +108,11 @@
         <script src="/js/jqBootstrapValidation.js"></script>
         <script>
             $(function () {
-                $("#addAuthorForm input,#addAuthorForm textarea").jqBootstrapValidation();
+                $("#signupForm input").jqBootstrapValidation();
             });
 
             /*When clicking on inputs hide fail/success boxes */
-            $("#name").focus(function () {
+            $("#fname").focus(function () {
                 $("#success").html("");
             });
         </script>

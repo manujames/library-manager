@@ -35,7 +35,7 @@
             </div>
         </nav>
         <!-- Add book-->
-        <section class="page-section" id="addBook">
+        <section class="page-section input-section input-section-bg-dark" id="addBook">
             <div class="container">
                 <br>
                 <br>
@@ -43,7 +43,7 @@
                     <h2 class="section-heading text-uppercase">Add New Book</h2>
                     <h3 class="section-subheading text-muted">Enter details of new book.</h3>
                 </div>
-                <form id="addBookForm" name="addBookForm" action="/books/add-book" method="POST" novalidate=true>
+                <form id="addBookForm" name="addBookForm" class="input-form" action="/books/add-book" method="POST" novalidate=true>
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -102,7 +102,7 @@
         <script src="/js/jqBootstrapValidation.js"></script>
         <script>
             $(function () {
-                $("#addBookForm input,#addBookForm textarea,#addBookForm button").jqBootstrapValidation();
+                $("#addBookForm input,#addBookForm textarea").jqBootstrapValidation();
             });
 
             /*When clicking on inputs hide fail/success boxes */
