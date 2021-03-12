@@ -29,15 +29,18 @@ router = (nav)=>{
         }
     })
     accountsRouter.get('/signup', (req,res)=>{
+        let errorMsg = '';
         res.render('signup',
         {
             nav,
-            title: 'Library Manager | Sign up'
+            title: 'Library Manager | Sign up',
+            errorMsg
         });
     });
     accountsRouter.post('/signup', (req,res)=>{
         let newUser = req.body;
         let userExist = false;
+        let errorMsg = '';
         for(let i = 0; i<users.length; i++){
             if(newUser.email === users[i].email){
                 userExist = true;
@@ -45,18 +48,19 @@ router = (nav)=>{
             }
         }
         if(userExist){
-            res.redirect('/accounts/signup');
+            errorMsg = 'Email id alredy registered.';
+            res.render('signup',
+            {
+                nav,
+                title: 'Library Manager | Sign up',
+                errorMsg
+            });
         }
         else{
             users.push(newUser);
             res.redirect('/accounts/login');
         }
     });
-    // accountsRouter.post('/add-book', (req,res)=>{
-    //     let newBook = req.body;
-    //     books.push(newBook);
-    //     res.redirect('/books');
-    // });
     return accountsRouter;
 }
 

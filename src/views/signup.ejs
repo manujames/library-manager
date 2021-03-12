@@ -34,7 +34,7 @@
                 </div>
             </div>
         </nav>
-        <!-- Add book-->
+        <!-- Sign up-->
         <section class="page-section input-section input-section-bg-theme" id="addBook">
             <div class="container">
                 <br>
@@ -45,39 +45,52 @@
                     <!-- <h3 class="section-subheading text-muted">Enter details of new book.</h3> -->
                 </div>
                 <form id="signupForm" name="signupForm" class="input-form" action="/accounts/signup" method="POST" novalidate=true>
-                    <div class="row align-items-stretch mb-5 d-flex-inline justify-content-around flex-md-row">
+                    <div class="row align-items-stretch mb-5 justify-content-around">
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" id="fname" name="fname" type="text" placeholder="First name *" required="required" data-validation-required-message="Please enter your first name." />
+                                        <input class="form-control" id="fname" name="fname" type="text" placeholder="First name *"
+                                            required="required" data-validation-required-message="Please enter your first name." />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" id="sname" name="sname" type="text" placeholder="Second name *" required="required" data-validation-required-message="Please enter your second name." />
+                                        <input class="form-control" id="sname" name="sname" type="text" placeholder="Second name *"
+                                            required="required" data-validation-required-message="Please enter your second name." />
                                         <p class="help-block text-danger"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="email" name="email" type="email" placeholder="Email id *" required="required" data-validation-required-message="Please enter your email id." />
+                                <input class="form-control" id="email" name="email" type="email" placeholder="Email id *"
+                                    required="required" data-validation-required-message="Please enter your email id." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Password *" required="required" data-validation-required-message="Please enter a password." />
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Password *"
+                                    required="required" data-validation-required-message="Please enter a password."
+                                    minlength="8" data-validation-minlength-message="Password should be minimum 8 characters"
+                                    data-validation-containsnumber-regex="(.*[0-9].*)" data-validation-containsnumber-message="Needs at least one number"
+                                    data-validation-containslower-regex="(.*[a-z].*)" data-validation-containslower-message="Needs at least one lowercase letter"
+                                    data-validation-containsupper-regex="(.*[A-Z].*)" data-validation-containsupper-message="Needs at least one uppercase letter"
+                                    data-validation-containsymbol-regex="(.*[!-/:-@[-`{-~].*)" data-validation-containsymbol-message="Needs at least one special character"/>
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="repeatPassword" name="repeatPassword" type="password" placeholder="Repeat password *" required="required" data-validation-required-message="Please repeat your password." />
+                                <input class="form-control" id="repeatPassword" name="repeatPassword" type="password" placeholder="Repeat password *"
+                                    data-validation-match-match="password" data-validation-match-message="Passwords do not match."
+                                    required="required" data-validation-required-message="Please repeat your password."/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <div id="success"></div>
+                        <div id="success"><%=errorMsg%></div>
                         <button class="btn btn-theme btn-xl text-uppercase" id="signupButton" type="submit">Sign up</button>
+                        <br>
+                        <p class="form-notes">Already have an account? <a href="/accounts/login">Log in</a></p>
                     </div>
                 </form>
             </div>

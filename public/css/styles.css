@@ -10015,8 +10015,9 @@ p {
   line-height: 1.75;
 }
 
-.page-section {
+.page-section:not(#about) {
   padding: 6rem 0;
+  min-height: 90vh;
 }
 .page-section h2.section-heading {
   font-size: 2.5rem;
@@ -10500,6 +10501,19 @@ header.masthead .masthead-heading {
 .team-member h4 {
   margin-top: 1.5rem;
   margin-bottom: 0;
+}
+
+.form-notes{
+  color: white;
+}
+.form-notes a {
+  color: #fed136;
+  text-decoration: none;
+  background-color: transparent;
+}
+.form-notes a:hover {
+  color: #e6b301;
+  text-decoration: underline;
 }
 
 section.input-section-bg-dark{
