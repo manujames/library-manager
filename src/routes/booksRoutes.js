@@ -1,5 +1,6 @@
 const express = require('express');
 const booksRouter = express.Router();
+const auth = require('C:/Users/ASUS/ICTAK/FSD/assignment#2/library-manager/auth.js');   
 
 router = (nav)=>{
     const books = [
@@ -34,6 +35,7 @@ router = (nav)=>{
             title: 'Library Manager | Books'
         });
     });
+    booksRouter.use(auth);
     booksRouter.get('/add-book', (req,res)=>{
         res.render('addBook',
         {

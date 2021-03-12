@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
 
-const port = process.env.PORT || 5000;
+const cookierParser = require('cookie-parser');
+app.use(cookierParser('abcdef-12345'))
+
+const auth = require('./auth');
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({extended:false}));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
+
+const port = process.env.PORT || 5000;
 
 const nav = [
     {link:'/books', name:'Books'},

@@ -47,18 +47,20 @@
                 <form id="loginForm" name="loginForm" class="input-form" action="/accounts/login" method="POST" novalidate=true>
                     <div class="row align-items-stretch mb-5 justify-content-around">
                         <div class="col-md-6">
+                            <div id="success" class="text-center"></div>
                             <div class="form-group">
-                                <input class="form-control" id="email" name="email" type="email" placeholder="Email id *" required="required" data-validation-required-message="Please enter your registered email." />
+                                <input class="form-control" id="email" name="email" type="email" placeholder="Email id *" value="<%=user.email%>"
+                                    required="required" data-validation-required-message="Please enter your registered email." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Password *" required="required" data-validation-required-message="Please enter your password." />
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Password *" value="<%=user.password%>"
+                                    required="required" data-validation-required-message="Please enter your password." />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <div id="success"></div>
                         <button class="btn btn-theme btn-xl text-uppercase" id="loginButton" type="submit">Log in</button>
                         <br>
                         <p class="form-notes">Don't have an account? <a href="/accounts/signup">Sign up</a></p>
@@ -90,16 +92,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Form validation JS-->
         <script src="/js/jqBootstrapValidation.js"></script>
-        <script>
-            $(function () {
-                $("#loginForm input").jqBootstrapValidation();
-            });
-
-            /*When clicking on inputs hide fail/success boxes */
-            $("#email").focus(function () {
-                $("#success").html("");
-            });
+        <script>                                            // To make errorMsg and successMsg available in external js file.
+            var errorMsg = "<%=errorMsg%>";
+            var successMsg = "<%=successMsg%>";
         </script>
+        <script src="/js/loginValidation.js"></script>      <!-- This external js file handles validations -->
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>        
     </body>
