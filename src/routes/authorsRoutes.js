@@ -24,25 +24,46 @@ router = (nav)=>{
     ];
 
     authorsRouter.get('/', (req,res)=>{
-        res.render('authors',
-        {
-            nav,
-            authors,
-            title: 'Library Manager | Authors'
-        });
+        let response = {};
+        response.title = 'Library Manager | Authors';
+        response.authors = authors;
+        if(req.session.user){
+            response.nav = nav.user;
+            response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+        }
+        else{
+            response.nav = nav.guest;
+            response.profileName = '';
+        }
+        res.render('authors',response);
     });
 
     authorsRouter.get('/add-author', (req,res)=>{
-        res.render('addAuthor',
-        {
-            nav,
-            title: 'Library Manager | Add New Author'
-        });
+        let response = {};
+        response.title = 'Library Manager | Add New Author';
+        if(req.session.user){
+            response.nav = nav.user;
+            response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+            res.render('addAuthor',response);
+        }
+        else{
+            response.nav = nav.guest;
+            response.profileName = '';
+            res.render('accessDenied',response);
+        }
     });
+
     authorsRouter.post('/add-author', (req,res)=>{
         let newAuthor = req.body;
-        authors.push(newAuthor);
-        res.redirect('/authors');
+        if(req.session.user){
+            authors.push(newAuthor);
+            res.redirect('/authors');
+        }
+        else{
+            // If not logged in, do not add book.
+            // Redirect to same page. It will be handled in get route.
+            res.redirect('/authors/add-author');
+        }
     });
     return authorsRouter;
 }

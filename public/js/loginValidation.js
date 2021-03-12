@@ -27,11 +27,6 @@ $(document).ready(function(){
             $("<strong>").text(window.successMsg)
         );
         $("#success > .alert-success").append("</div>");
-
-        // Redirect to home page after a delay
-        setTimeout(function(){
-            window.location.replace('/');
-        },2000);
     }
     
     /*When clicking on inputs hide fail/success boxes */

@@ -4,16 +4,19 @@ const accountsRouter = express.Router();
 router = (nav)=>{
     let users = [];
     accountsRouter.get('/login', (req,res)=>{
-        let errorMsg = '';
-        let successMsg = '';
-        res.render('login',
-        {
-            nav,
-            title: 'Library Manager | Log in',
-            user: {email: '', password: ''},
-            errorMsg,
-            successMsg
-        });
+        let response = {};
+        if(req.session.user){
+            res.redirect('/');
+        }
+        else {
+            response.title = 'Library Manager | Log in';
+            response.nav = nav.guest;
+            response.profileName = '';
+            response.user = {fname: '', sname: '', email: '', password: ''};
+            response.errorMsg = '';
+            response.successMsg = '';
+            res.render('login',response);
+        }
     });
 
     accountsRouter.post('/login', (req,res)=>{
@@ -21,43 +24,50 @@ router = (nav)=>{
         let user = req.body;
         // Flags
         let validLogin = false;
-        let errorMsg = '';
-        let successMsg = '';
+        let response = {};
+        response.title = 'Library Manager | Log in';
         // Check login credentials
         for(let i=0; i<users.length; i++){
             if(user.email === users[i].email && user.password === users[i].password){
+                user = users[i];
                 validLogin = true;
                 break;
             }
         }
         if(validLogin){
-            successMsg = 'Success. Redirecting to home page.'
+            // response.nav = nav.user;
+            // response.user = user;
+            // response.errorMsg = '';
+            // response.successMsg = 'Success. Redirecting to home page.'
+            // Set session information
+            req.session.user = user;
+            res.redirect('back');
         }
         else{
-            errorMsg = 'Wrong email or password'
+            response.nav = nav.guest;
+            response.profileName = '';
+            response.user = user;
+            response.errorMsg = 'Wrong email or password';
+            response.successMsg = '';
+            // Render page with error/success message
+            res.render('login',response);
         }
-        // Render page with error/success message
-        res.render('login',
-        {
-            nav,
-            title: 'Library Manager | Log in',
-            user,
-            errorMsg,
-            successMsg
-        });
     })
     
     accountsRouter.get('/signup', (req,res)=>{
-        let errorMsg = '';
-        let successMsg = '';
-        res.render('signup',
-        {
-            nav,
-            title: 'Library Manager | Sign up',
-            user: {fname: '', sname: '', email: '', password: ''},
-            errorMsg,
-            successMsg
-        });
+        let response = {};
+        if(req.session.user){
+            res.redirect('/');
+        }
+        else{
+            response.title = 'Library Manager | Sign up';
+            response.nav = nav.guest;
+            response.profileName = '';
+            response.user = {fname: '', sname: '', email: '', password: ''};
+            response.errorMsg = '';
+            response.successMsg = '';
+            res.render('signup',response);
+        }
     });
     
     accountsRouter.post('/signup', (req,res)=>{
@@ -70,8 +80,8 @@ router = (nav)=>{
         };
         // Flags
         let userExist = false;
-        let errorMsg = '';
-        let successMsg = '';
+        let response = {};
+        response.title = 'Library Manager | Sign up';
         //Check whether email id already registered
         for(let i = 0; i<users.length; i++){
             if(newUser.email === users[i].email){
@@ -80,23 +90,31 @@ router = (nav)=>{
             }
         }
         if(userExist){
-            // Set error message
-            errorMsg = 'Email id alredy registered.';
+            response.nav = nav.guest;
+            response.user = newUser;
+            response.profileName = '';
+            response.errorMsg = 'Email id alredy registered.';
+            response.successMsg = '';
+            // Render page with error/success message
+            res.render('signup',response);
         }
         else{
-            // Add new user to the users array and set success message
+            // Add new user to the users array
+            // set session information
+            // and set success message
             users.push(newUser);
-            successMsg = 'Success. Redirecting to log in page.';
+            req.session.user = newUser;
+            // response.nav = nav.user;
+            // response.user = newUser;
+            // response.errorMsg = '';
+            // response.successMsg = `Success! Welcome ${newUser.fname}.`;
+            res.redirect('back');
         }
-        // Render page with error/success message
-        res.render('signup',
-        {
-            nav,
-            title: 'Library Manager | Sign up',
-            user: newUser,
-            errorMsg,
-            successMsg
-        });
+    });
+
+    accountsRouter.get('/logout', (req, res)=>{
+        req.session.destroy();
+        res.redirect('/accounts/login');
     });
     return accountsRouter;
 }

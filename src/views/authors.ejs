@@ -28,7 +28,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                         <%for(let i = 0; i < nav.length; i++){%>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=nav[i].name%></a></li>
+                            <%if(nav[i].name==="profile"){%>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=profileName%> <img src="/images/person.png" alt="" style="width:20px;height:20px;border-radius:50%;"></a>
+                                </li>
+                            <%} else{%>
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=nav[i].name%></a></li>
+                            <%}%>
                         <%}%>
                     </ul>
                 </div>
@@ -50,7 +56,7 @@
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
-                                    <img class="img-fluid" src="<%=authors[i].img%>" alt="" onerror='this.src="/images/author-default.png"' style="width:400px;height:300px" />
+                                    <img class="img-fluid" src="<%=authors[i].img%>" alt="" onerror='this.src="/images/person.png"' style="width:400px;height:300px" />
                                 </a>
                                 <div class="portfolio-caption">
                                     <div class="portfolio-caption-heading"><%=authors[i].name%></div>
@@ -91,14 +97,14 @@
                                     <div class="modal-body">
                                         <h2 class="text-uppercase"><%=authors[i].name%></h2>
                                         <br>
-                                        <img class="img-fluid d-block mx-auto" src="<%=authors[i].img%>" alt="" onerror='this.src="/images/author-default.png"' />
+                                        <img class="img-fluid d-block mx-auto" src="<%=authors[i].img%>" alt="" onerror='this.src="/images/person.png"' />
                                         <p class="item-intro text-muted">
                                             <b>Famouse works</b>: <%=authors[i].books%>
                                             <br>
                                             <br>
                                             <%=authors[i].description%> 
                                         </p>
-                                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <button class="btn btn-theme" data-dismiss="modal" type="button">
                                             <i class="fas fa-times mr-1"></i>
                                             Close
                                         </button>

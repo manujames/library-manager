@@ -28,7 +28,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                         <%for(let i = 0; i < nav.length; i++){%>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=nav[i].name%></a></li>
+                            <%if(nav[i].name==="profile"){%>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=profileName%> <img src="/images/person.png" alt="" style="width:20px;height:20px;border-radius:50%;"></a>
+                                </li>
+                            <%} else{%>
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=nav[i].link%>"><%=nav[i].name%></a></li>
+                            <%}%>
                         <%}%>
                     </ul>
                 </div>
@@ -101,7 +107,7 @@
                                             <br>
                                             <%=books[i].description%> 
                                         </p>
-                                        <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                        <button class="btn btn-theme" data-dismiss="modal" type="button">
                                             <i class="fas fa-times mr-1"></i>
                                             Close
                                         </button>

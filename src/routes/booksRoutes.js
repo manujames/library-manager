@@ -1,6 +1,5 @@
 const express = require('express');
 const booksRouter = express.Router();
-const auth = require('C:/Users/ASUS/ICTAK/FSD/assignment#2/library-manager/auth.js');   
 
 router = (nav)=>{
     const books = [
@@ -28,25 +27,46 @@ router = (nav)=>{
     ];
 
     booksRouter.get('/', (req,res)=>{
-        res.render('books',
-        {
-            nav,
-            books,
-            title: 'Library Manager | Books'
-        });
+        let response = {};
+        response.title = 'Library Manager | Books';
+        response.books = books;
+        if(req.session.user){
+            response.nav = nav.user;
+            response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+        }
+        else{
+            response.nav = nav.guest;
+            response.profileName = '';
+        }
+        res.render('books',response);
     });
-    booksRouter.use(auth);
+
     booksRouter.get('/add-book', (req,res)=>{
-        res.render('addBook',
-        {
-            nav,
-            title: 'Library Manager | Add New Book'
-        });
+        let response = {};
+        response.title = 'Library Manager | Add New Book';
+        if(req.session.user){
+            response.nav = nav.user;
+            response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+            res.render('addBook',response);
+        }
+        else{
+            response.nav = nav.guest;
+            response.profileName = '';
+            res.render('accessDenied',response);
+        }
     });
+
     booksRouter.post('/add-book', (req,res)=>{
         let newBook = req.body;
-        books.push(newBook);
-        res.redirect('/books');
+        if(req.session.user){
+            books.push(newBook);
+            res.redirect('/books');
+        }
+        else{
+            // If not logged in, do not add book.
+            // Redirect to same page. It will be handled in get route.
+            res.redirect('/books/add-book');
+        }
     });
     return booksRouter;
 }
