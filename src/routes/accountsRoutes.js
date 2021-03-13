@@ -35,13 +35,9 @@ router = (nav)=>{
             }
         }
         if(validLogin){
-            // response.nav = nav.user;
-            // response.user = user;
-            // response.errorMsg = '';
-            // response.successMsg = 'Success. Redirecting to home page.'
             // Set session information
             req.session.user = user;
-            res.redirect('back');
+            res.redirect('/');
         }
         else{
             response.nav = nav.guest;
@@ -100,14 +96,9 @@ router = (nav)=>{
         }
         else{
             // Add new user to the users array
-            // set session information
-            // and set success message
+            // and set session information
             users.push(newUser);
             req.session.user = newUser;
-            // response.nav = nav.user;
-            // response.user = newUser;
-            // response.errorMsg = '';
-            // response.successMsg = `Success! Welcome ${newUser.fname}.`;
             res.redirect('back');
         }
     });
