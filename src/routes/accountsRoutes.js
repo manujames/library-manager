@@ -1,8 +1,8 @@
 const express = require('express');
 const accountsRouter = express.Router();
+const UserData = require('../model/Database').UserData;
 
 router = (nav)=>{
-    let users = [];
     accountsRouter.get('/login', (req,res)=>{
         let response = {};
         if(req.session.user){
@@ -21,33 +21,30 @@ router = (nav)=>{
 
     accountsRouter.post('/login', (req,res)=>{
         // Fetch user inputs from form
-        let user = req.body;
-        // Flags
-        let validLogin = false;
+        let inputUser = req.body;
         let response = {};
         response.title = 'Library Manager | Log in';
         // Check login credentials
-        for(let i=0; i<users.length; i++){
-            if(user.email === users[i].email && user.password === users[i].password){
-                user = users[i];
-                validLogin = true;
-                break;
+        UserData.findOne({email:inputUser.email})
+        .then((user)=>{
+            if(user && user.password === inputUser.password){       // Found email id and passwords matching
+                req.session.user = user;
+                res.redirect('/');
             }
-        }
-        if(validLogin){
-            // Set session information
-            req.session.user = user;
-            res.redirect('/');
-        }
-        else{
-            response.nav = nav.guest;
-            response.profileName = '';
-            response.user = user;
-            response.errorMsg = 'Wrong email or password';
-            response.successMsg = '';
-            // Render page with error/success message
-            res.render('login',response);
-        }
+            else{
+                response.nav = nav.guest;
+                response.profileName = '';
+                response.user = inputUser;
+                response.errorMsg = 'Wrong email or password';
+                response.successMsg = '';
+                // Render page with error/success message
+                res.render('login',response);
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            //Handle error here
+        });
     })
     
     accountsRouter.get('/signup', (req,res)=>{
@@ -74,33 +71,33 @@ router = (nav)=>{
             email: req.body.email,
             password: req.body.password
         };
-        // Flags
-        let userExist = false;
         let response = {};
         response.title = 'Library Manager | Sign up';
-        //Check whether email id already registered
-        for(let i = 0; i<users.length; i++){
-            if(newUser.email === users[i].email){
-                userExist = true;
-                break;
+        UserData.findOne({email:newUser.email})
+        .then((user)=>{
+            if(user){       // Email id already in use
+                response.nav = nav.guest;
+                response.user = newUser;
+                response.profileName = '';
+                response.errorMsg = 'Email id alredy registered.';
+                response.successMsg = '';
+                // Render page with error/success message
+                res.render('signup',response);
             }
-        }
-        if(userExist){
-            response.nav = nav.guest;
-            response.user = newUser;
-            response.profileName = '';
-            response.errorMsg = 'Email id alredy registered.';
-            response.successMsg = '';
-            // Render page with error/success message
-            res.render('signup',response);
-        }
-        else{
-            // Add new user to the users array
-            // and set session information
-            users.push(newUser);
-            req.session.user = newUser;
-            res.redirect('back');
-        }
+            else{
+                // Add new user to the users array
+                // and set session information
+                UserData(newUser).save()
+                .then(()=>{
+                    req.session.user = newUser;
+                    res.redirect('back');
+                })
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            //Handle error here
+        });
     });
 
     accountsRouter.get('/logout', (req, res)=>{
