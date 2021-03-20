@@ -74,6 +74,68 @@ router = (nav)=>{
             res.redirect('/books/add-book');
         }
     });
+
+    booksRouter.get('/edit/:id', (req,res)=>{
+        let bookId = req.params.id;
+        let response = {};
+        response.title = 'Library Manager | Edit Book';
+        if(req.session.user){
+            response.nav = nav.user;
+            response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+            BookData.findById(bookId)
+            .then((book)=>{
+                response.book = book;
+                res.render('editBook',response);
+            });
+        }
+        else{
+            response.nav = nav.guest;
+            response.profileName = '';
+            res.render('accessDenied',response);
+        }
+    });
+
+    booksRouter.post('/edit/:id', (req,res)=>{
+        let bookId = req.params.id;
+        let updatedBook = req.body;
+        if(req.session.user){
+            BookData.findByIdAndUpdate(bookId, updatedBook)
+            .then(()=>{
+                res.redirect('/books');
+            })
+            .catch((err)=>{
+                console.log(err);
+                // Handle errors
+            });
+        }
+        else{
+            // If not logged in, do not modify book.
+            // Redirect to same page. It will be handled in get route.
+            res.redirect(`/books/edit/${bookId}`);
+        }
+    });
+
+    booksRouter.get('/delete/:id',(req,res)=>{
+        let bookId = req.params.id;
+        let response = {};
+        if(req.session.user){
+            BookData.findByIdAndDelete(bookId)
+            .then(()=>{
+                res.redirect('/books');
+            })
+            .catch((err)=>{
+                console.log(err);
+                // Handle errors
+            });
+        }
+        else{
+            // If not logged in, do not delete book.
+            response.title = 'Library Manager | Delete Book';
+            response.nav = nav.guest;
+            response.profileName = '';
+            res.render('accessDenied',response);
+        }
+    });
     return booksRouter;
 }
 

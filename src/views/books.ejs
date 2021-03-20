@@ -52,7 +52,7 @@
                     <%for(let i = 0; i < books.length; i++){%>
                         <div class="col-lg-4 col-sm-6 mb-4">
                             <div class="portfolio-item">
-                                <a class="portfolio-link" data-toggle="modal" href="#book<%=i%>">
+                                <a class="portfolio-link" data-toggle="modal" href="#book<%=books[i]._id%>">
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
@@ -87,7 +87,7 @@
         </footer>
         <!-- Single book-->
         <%for(let i = 0; i < books.length; i++){%>
-            <div class="portfolio-modal modal fade" id="book<%=i%>" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="portfolio-modal modal fade" id="book<%=books[i]._id%>" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="close-modal" data-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
@@ -107,7 +107,15 @@
                                             <br>
                                             <%=books[i].description%> 
                                         </p>
-                                        <button class="btn btn-theme" data-dismiss="modal" type="button">
+                                        <a href="/books/edit/<%=books[i]._id%>" class="btn btn-theme" role="button">
+                                            <i class="fas fa-times mr-1"></i>
+                                            Edit
+                                        </a>
+                                        <a href="/books/delete/<%=books[i]._id%>" class="btn btn-danger" role="button">
+                                            <i class="fas fa-times mr-1"></i>
+                                            Delete
+                                        </a>
+                                        <button class="btn btn-success" data-dismiss="modal" type="button">
                                             <i class="fas fa-times mr-1"></i>
                                             Close
                                         </button>

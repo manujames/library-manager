@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 
 const session = require('express-session');
+const MongoStore = require('connect-mongo');    //Save user session information to database
 app.use(session({
     secret: 'abcdef-12345',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: false },
+    store: MongoStore.create({mongoUrl: 'mongodb://localhost:27017/LibraryManagerSessions'})
 }));
 
 
