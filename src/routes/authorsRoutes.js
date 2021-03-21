@@ -160,6 +160,28 @@ router = (nav)=>{
             res.redirect(`/authors/edit/${authorId}`);
         }
     });
+
+    authorsRouter.post('/delete/',(req,res)=>{
+        let authorId = req.body.id;
+        let response = {};
+        if(req.session.user){
+            AuthorData.findByIdAndDelete(authorId)
+            .then(()=>{
+                res.redirect('/authors');
+            })
+            .catch((err)=>{
+                console.log(err);
+                // Handle errors
+            });
+        }
+        else{
+            // If not logged in, do not delete book.
+            response.title = 'Library Manager | Delete Author';
+            response.nav = nav.guest;
+            response.profileName = '';
+            res.render('accessDenied',response);
+        }
+    });
     return authorsRouter;
 }
 

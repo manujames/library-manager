@@ -8,7 +8,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false },
-    store: MongoStore.create({mongoUrl: 'mongodb://localhost:27017/LibraryManagerSessions'})
+    store: MongoStore.create({mongoUrl: 'mongodb://localhost:27017/LibraryData'})
 }));
 
 

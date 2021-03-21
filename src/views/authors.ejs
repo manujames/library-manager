@@ -113,17 +113,47 @@
                                             <%=authors[i].description%> 
                                         </p>
                                         <a href="/authors/edit/<%=authors[i]._id%>" class="btn btn-theme" role="button">
-                                            <i class="fas fa-times mr-1"></i>
+                                            <i class="fas fa-edit mr-1"></i>
                                             Edit
                                         </a>
-                                        <a href="/authors/delete/<%=authors[i]._id%>" class="btn btn-danger" role="button">
-                                            <i class="fas fa-times mr-1"></i>
+                                        <a href="#deleteConfirmation<%=authors[i]._id%>" data-toggle="modal" role="alert" class="btn btn-danger">
+                                            <i class="fas fa-trash mr-1"></i>
                                             Delete
                                         </a>
                                         <button class="btn btn-success" data-dismiss="modal" type="button">
                                             <i class="fas fa-times mr-1"></i>
                                             Close
                                         </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+
+        <!-- Delete confirmations-->
+        <%for(let i = 0; i < authors.length; i++){%>
+            <div class="portfolio-modal modal fade" id="deleteConfirmation<%=authors[i]._id%>" style="width:88%; padding-left: 10%;" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <div class="modal-body">
+                                        <h4 class="text-uppercase">Are you sure want to delete this item?</h4>
+                                        <form action="/authors/delete" method="POST">
+                                            <input type="hidden" id="id" name="id" value="<%=authors[i]._id%>">
+                                            <button class="btn btn-danger" type="submit">
+                                                <i class="fas fa-check mr-1"></i>
+                                                Yes
+                                            </button>
+                                            <button class="btn btn-dark" data-dismiss="modal" type="button">
+                                                <i class="fas fa-times mr-1"></i>
+                                                No
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

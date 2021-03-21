@@ -171,8 +171,8 @@ router = (nav)=>{
         }
     });
 
-    booksRouter.get('/delete/:id',(req,res)=>{
-        let bookId = req.params.id;
+    booksRouter.post('/delete/',(req,res)=>{
+        let bookId = req.body.id;
         let response = {};
         if(req.session.user){
             BookData.findByIdAndDelete(bookId)
