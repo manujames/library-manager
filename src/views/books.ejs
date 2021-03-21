@@ -56,7 +56,11 @@
                                     <div class="portfolio-hover">
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
-                                    <img class="img-fluid" src="<%=books[i].img%>" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
+                                    <%if(books[i].img.data){%>
+                                        <img class="img-fluid" src="data:image/<%=books[i].img.contentType%>;base64, <%=books[i].img.data.toString('base64')%>" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
+                                    <%}else{%>
+                                        <img class="img-fluid" src="" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
+                                    <%}%>
                                 </a>
                                 <div class="portfolio-caption">
                                     <div class="portfolio-caption-heading"><%=books[i].title%></div>
@@ -98,7 +102,11 @@
                                         <!-- Project Details Go Here-->
                                         <h2 class="text-uppercase"><%=books[i].title%></h2>
                                         <br>
-                                        <img class="img-fluid d-block mx-auto" src="<%=books[i].img%>" alt="" onerror='this.src="/images/book-default.png"' />
+                                        <%if(books[i].img.data){%>
+                                            <img class="img-fluid d-block mx-auto" src="data:image/<%=books[i].img.contentType%>;base64, <%=books[i].img.data.toString('base64')%>" alt="" onerror='this.src="/images/book-default.png"' />
+                                        <%}else{%>
+                                            <img class="img-fluid d-block mx-auto" src="" alt="" onerror='this.src="/images/book-default.png"' />
+                                        <%}%>
                                         <p class="item-intro text-muted">
                                             <b>Author</b>: <%=books[i].author%>
                                             <br>

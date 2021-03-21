@@ -49,30 +49,31 @@
                     <h2 class="section-heading text-uppercase">Add New Author</h2>
                     <h3 class="section-subheading text-muted">Enter details of author.</h3>
                 </div>
-                <form id="addAuthorForm" name="addAuthorForm" class="input-form" action="/authors/add-author" method="POST" novalidate=true>
+                <form id="addAuthorForm" name="addAuthorForm" class="input-form" action="/authors/add-author" method="POST" enctype="multipart/form-data" novalidate=true>
                     <div class="row align-items-stretch mb-5">
+                        <div id="success" class="col-md-12 text-center"></div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" id="name" name="name" type="text" placeholder="Name *" required="required" data-validation-required-message="Please enter author's name." />
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Name *" value="<%=author.name%>" required="required" data-validation-required-message="Please enter author's name." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="a_books" name="books" type="text" placeholder="Major works *" required="required" data-validation-required-message="Please enter popular works by the author." />
+                                <input class="form-control" id="a_books" name="books" type="text" placeholder="Major works *" value="<%=author.books%>" required="required" data-validation-required-message="Please enter popular works by the author." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group mb-md-0">
-                                <input class="form-control" id="img" name="img" type="text" placeholder="Image url"/>
+                                <label for="img" style="color: white;">Select an image of size less than 1 MB</label>
+                                <input class="form-control" id="img" name="img" type="file" accept="image/*"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="description" name="description" placeholder="About author *" required="required" data-validation-required-message="Please enter a short description about the author."></textarea>
+                                <textarea class="form-control" id="description" name="description" placeholder="About author *" required="required" data-validation-required-message="Please enter a short description about the author."><%=author.description%></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <div id="success"></div>
                         <button class="btn btn-primary btn-xl text-uppercase" id="addAuthorButton" type="submit">Add</button>
                     </div>
                 </form>
@@ -103,15 +104,10 @@
         <!-- Form validation JS-->
         <script src="/js/jqBootstrapValidation.js"></script>
         <script>
-            $(function () {
-                $("#addAuthorForm input,#addAuthorForm textarea").jqBootstrapValidation();
-            });
-
-            /*When clicking on inputs hide fail/success boxes */
-            $("#addAuthorForm input #addAuthorForm textarea").focus(function () {
-                $("#success").html("");
-            });
+            var errorMsg = "<%=errorMsg%>";
+            var successMsg = "<%=successMsg%>";
         </script>
+        <script src="/js/addAuthorValidation.js"></script>      <!-- This external js file handles validations -->
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>        
     </body>

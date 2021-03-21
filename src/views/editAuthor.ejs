@@ -41,28 +41,24 @@
             </div>
         </nav>
         <!-- Add book-->
-        <section class="page-section input-section input-section-bg-dark d-flex align-items-center" id="addBook">
+        <section class="page-section input-section input-section-bg-dark d-flex align-items-center" id="addAuthor">
             <div class="container">
                 <br>
                 <br>
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Add New Book</h2>
-                    <h3 class="section-subheading text-muted">Enter details of new book.</h3>
+                    <h2 class="section-heading text-uppercase">Edit Author Information</h2>
+                    <h3 class="section-subheading text-muted">Modify details of author.</h3>
                 </div>
-                <form id="addBookForm" name="addBookForm" class="input-form" action="/books/add-book" method="POST" enctype="multipart/form-data" novalidate=true>
+                <form id="addAuthorForm" name="addAuthorForm" class="input-form" action="/authors/edit/<%=author._id%>" method="POST" enctype="multipart/form-data" novalidate=true>
                     <div class="row align-items-stretch mb-5">
                         <div id="success" class="col-md-12 text-center"></div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" id="title" name="title" type="text" placeholder="Title *" value="<%=book.title%>" required="required" data-validation-required-message="Please enter book title." />
+                                <input class="form-control" id="name" name="name" type="text" placeholder="Name *" value="<%=author.name%>" required="required" data-validation-required-message="Please enter author's name." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="author" name="author" type="text" placeholder="Author *" value="<%=book.author%>" required="required" data-validation-required-message="Please enter auther name." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" id="genre" name="genre" type="text" placeholder="Genre *" value="<%=book.genre%>" required="required" data-validation-required-message="Please enter book genre." />
+                                <input class="form-control" id="a_books" name="books" type="text" placeholder="Major works *" value="<%=author.books%>" required="required" data-validation-required-message="Please enter popular works by the author." />
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group mb-md-0">
@@ -72,13 +68,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-textarea mb-md-0">
-                                <textarea class="form-control" id="description" name="description" placeholder="Description *" required="required" data-validation-required-message="Please enter a short description."><%=book.description%></textarea>
+                                <textarea class="form-control" id="description" name="description" placeholder="About author *" required="required" data-validation-required-message="Please enter a short description about the author."><%=author.description%></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary btn-xl text-uppercase" id="addBookButton" type="submit">Add</button>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="addAuthorButton" type="submit">Save</button>
                     </div>
                 </form>
             </div>
@@ -111,7 +107,7 @@
             var errorMsg = "<%=errorMsg%>";
             var successMsg = "<%=successMsg%>";
         </script>
-        <script src="/js/addBookValidation.js"></script>      <!-- This external js file handles validations -->
+        <script src="/js/addAuthorValidation.js"></script>      <!-- This external js file handles validations -->
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>        
     </body>

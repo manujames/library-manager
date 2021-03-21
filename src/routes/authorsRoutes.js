@@ -1,29 +1,21 @@
 const express = require('express');
 const authorsRouter = express.Router();
 const AuthorData = require('../model/Database').AuthorData;
+const multer = require('multer');
+
+// Use memory storage
+const storage = multer.memoryStorage();
+
+// Define the maximum size for uploading 
+// picture i.e. 1 MB. it is optional 
+const maxSize = 1 * 1000 * 1000;
+
+const upload = multer({
+    storage: storage,
+    limits: {fileSize: maxSize}
+}).single('img'); //Single file in img field of the form
 
 router = (nav)=>{
-    // const authors = [
-    //     {
-    //         name: 'Joseph Barbera',
-    //         books: 'Tom and Jerry, My Life in Toons: From Flatbush to Bedrock in Under a Century',
-    //         description: "Joseph Roland Barbera was an American animator, director, producer, storyboard artist, and cartoon artist, whose film and television cartoon characters entertained millions of fans worldwide for much of the 20th century.",
-    //         img:'/images/authors/joseph-barbera.jpg'
-    //     },
-    //     {
-    //         name:'J.K. Rowling',
-    //         books: 'Harry Potter, The Casual Vacancy, The Tales of Beedle the Bard',
-    //         description: 'Joanne Rowling CH, OBE, HonFRSE, FRCPE, FRSL, better known by her pen name J. K. Rowling, is a British author and philanthropist. She is best known for writing the Harry Potter fantasy series, which has won multiple awards and sold more than 500 million copies, becoming the best-selling book series in history.',
-    //         img:'/images/authors/jk-rowling.webp'
-    //     },
-    //     {
-    //         name: 'Vaikom Muhammed Basheer',
-    //         books: 'Pathummayude Aadu, Balyakala sakhi, Mathilukal, Premalekhanam',
-    //         description: 'Vaikom Muhammad Basheer is regarded as one of the prominent literary figures ever existed in india. He was a legend in Kerala. He was one of those outspoken figures who revolutionized Malayalam Literature, and Thus the World Literature itself with his dauntless sarcasm, satire, and black humor. Often referred to as the Beypore Sultan (the king of Beypore) by the colleagues, he was one of the prominent figures behind the artistical, economical, and social reformation of the Kerala Culture.',
-    //         img:'/images/authors/basheer.jpg'
-    //     }
-    // ];
-
     authorsRouter.get('/', (req,res)=>{
         let response = {};
         response.title = 'Library Manager | Authors';
@@ -48,6 +40,9 @@ router = (nav)=>{
         if(req.session.user){
             response.nav = nav.user;
             response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+            response.author = {},
+            response.errorMsg = '';
+            response.successMsg = '';
             res.render('addAuthor',response);
         }
         else{
@@ -58,17 +53,111 @@ router = (nav)=>{
     });
 
     authorsRouter.post('/add-author', (req,res)=>{
-        let newAuthor = req.body;
         if(req.session.user){
-            AuthorData(newAuthor).save()
-            .then(()=>{
-                res.redirect('/authors');
+            upload(req, res, (err)=>{
+                let newAuthor = req.body;
+                let response = {};
+                response.title = 'Library Manager | Add New Author';
+                response.nav = nav.user;
+                response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+                if (err){
+                    response.author = newAuthor;
+                    response.errorMsg = err.message;
+                    response.successMsg = '';
+                    res.render('addAuthor',response);
+                }
+                else{
+                    if(req.file){
+                        newAuthor.img = {
+                            data: req.file.buffer,
+                            contentType: req.file.mimetype
+                        }
+                    }
+                    else{
+                        newAuthor.img = {
+                            data: '',
+                            contentType: ''
+                        }
+                    }
+                    AuthorData(newAuthor).save()
+                    .then(()=>{
+                        res.redirect('/authors');
+                    });
+                }
             });
         }
         else{
             // If not logged in, do not add book.
             // Redirect to same page. It will be handled in get route.
             res.redirect('/authors/add-author');
+        }
+    });
+
+    authorsRouter.get('/edit/:id', (req,res)=>{
+        let authorId = req.params.id;
+        let response = {};
+        response.title = 'Library Manager | Edit Author';
+        if(req.session.user){
+            response.nav = nav.user;
+            response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+            AuthorData.findById(authorId)
+            .then((author)=>{
+                response.author = author;
+                response.errorMsg = '';
+                response.successMsg = '';
+                res.render('editAuthor',response);
+            });
+        }
+        else{
+            response.nav = nav.guest;
+            response.profileName = '';
+            res.render('accessDenied',response);
+        }
+    });
+
+    authorsRouter.post('/edit/:id', (req,res)=>{
+        let authorId = req.params.id;
+        if(req.session.user){
+            upload(req, res, (err)=>{
+                let updatedAuthor = req.body;
+                let response = {};
+                response.title = 'Library Manager | Edit Author';
+                response.nav = nav.user;
+                response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+                if (err){
+                    response.author = updatedAuthor;
+                    response.errorMsg = err.message;
+                    response.successMsg = '';
+                    res.render('editAuthor',response);
+                }
+                else{
+                    if(req.file){
+                        updatedAuthor.img = {
+                            data: req.file.buffer,
+                            contentType: req.file.mimetype
+                        }
+                    }
+                    else{
+                        updatedAuthor.img = {
+                            data: '',
+                            contentType: ''
+                        }
+                    }
+                    AuthorData.findByIdAndUpdate(authorId, updatedAuthor)
+                    .then(()=>{
+                        res.redirect('/authors');
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                        // Handle errors
+                    });
+                }
+            });
+        }
+        else{
+            // If not logged in, do not modify book.
+            // Redirect to same page. It will be handled in get route.
+            res.redirect(`/authors/edit/${authorId}`);
         }
     });
     return authorsRouter;

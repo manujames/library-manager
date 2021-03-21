@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/LibraryData', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/LibraryData', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
@@ -7,7 +7,10 @@ const BookSchema = new Schema({
     author: String,
     genre: String,
     description: String,
-    img: String
+    img:{
+        data: Buffer,
+        contentType: String
+    }
 });
 const BookData = mongoose.model('book', BookSchema);
 
@@ -15,7 +18,10 @@ const AuthorSchema = new Schema({
     name: String,
     books: String,
     description: String,
-    img: String
+    img:{
+        data: Buffer,
+        contentType: String
+    }
 });
 const AuthorData = mongoose.model('author', AuthorSchema);
 

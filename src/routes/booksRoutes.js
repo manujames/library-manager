@@ -1,32 +1,31 @@
 const express = require('express');
 const booksRouter = express.Router();
 const BookData = require('../model/Database').BookData;
+const multer = require('multer');
+
+// Use disk storage
+// const storage = multer.diskStorage({
+//     destination: function(req, file, callback) {
+//         callback(null, 'uploads');
+//     },
+//     filename: function (req, file, callback) {
+//         callback(null, file.fieldname);
+//     }
+// });
+
+// Use memory storage
+const storage = multer.memoryStorage();
+
+// Define the maximum size for uploading 
+// picture i.e. 1 MB. it is optional 
+const maxSize = 1 * 1000 * 1000;
+
+const upload = multer({
+    storage: storage,
+    limits: {fileSize: maxSize}
+}).single('img'); //Single file in img field of the form
 
 router = (nav)=>{
-    // const books = [
-    //     {
-    //         title: 'Tom and Jerry',
-    //         author: 'Joseph Barbera',
-    //         genre: 'Cartoon',
-    //         description: "For over 65 years, Tom and Jerry have entertained generations of cartoon viewers with their crazy game of cat and mouse. For this odd pair the natural order is never as simple as predator and prey, and anyone who's seen this mischevious duo knows that the chase goes both ways. With some fo the most elaborate and explosive prusuits imaginable, Tom and Jerry have invented invisible paint, traveled back in time, and defied amost every law of physics.",
-    //         img:'/images/books/Tom-and-Jerry-L.jpg'
-    //     },
-    //     {
-    //         title: 'Harry Potter',
-    //         author: 'J.K. Rowling',
-    //         genre: 'Fantasy',
-    //         description: 'The war against Voldemort is not going well; even Muggle governments are noticing. Ron scans the obituary pages of the Daily Prophet, looking for familiar names. Dumbledore is absent from Hogwarts for long stretches of time, and the Order of the Phoenix has already suffered losses.',
-    //         img:'/images/books/harry-potter.webp'
-    //     },
-    //     {
-    //         title: 'Pathummayude Aadu',
-    //         author: 'Vaikom Muhammed Basheer',
-    //         genre: 'Drama',
-    //         description: 'Pathummayude Aadu is one of the most popular works by Vaikom Muhammad Basheer. It has a long foreword by the novelist himself and a longer afterword by P K Balakrishnan. This special edition also has illustrations by Sherif and photographs of the real characters including Pathumma and goats.',
-    //         img:'/images/books/pathummayude-aadu.png'
-    //     }
-    // ];
-
     booksRouter.get('/', (req,res)=>{
         let response = {};
         response.title = 'Library Manager | Books';
@@ -51,6 +50,9 @@ router = (nav)=>{
         if(req.session.user){
             response.nav = nav.user;
             response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+            response.book = {},
+            response.errorMsg = '';
+            response.successMsg = '';
             res.render('addBook',response);
         }
         else{
@@ -61,11 +63,37 @@ router = (nav)=>{
     });
 
     booksRouter.post('/add-book', (req,res)=>{
-        let newBook = req.body;
         if(req.session.user){
-            BookData(newBook).save()
-            .then(()=>{
-                res.redirect('/books');
+            upload(req, res, (err)=>{
+                let newBook = req.body;
+                let response = {};
+                response.title = 'Library Manager | Add New Book';
+                response.nav = nav.user;
+                response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+                if (err){
+                    response.book = newBook;
+                    response.errorMsg = err.message;
+                    response.successMsg = '';
+                    res.render('addBook',response);
+                }
+                else{
+                    if(req.file){
+                        newBook.img = {
+                            data: req.file.buffer,
+                            contentType: req.file.mimetype
+                        }
+                    }
+                    else{
+                        newBook.img = {
+                            data: '',
+                            contentType: ''
+                        }
+                    }
+                    BookData(newBook).save()
+                    .then(()=>{
+                        res.redirect('/books');
+                    });
+                }
             });
         }
         else{
@@ -85,6 +113,8 @@ router = (nav)=>{
             BookData.findById(bookId)
             .then((book)=>{
                 response.book = book;
+                response.errorMsg = '';
+                response.successMsg = '';
                 res.render('editBook',response);
             });
         }
@@ -97,15 +127,41 @@ router = (nav)=>{
 
     booksRouter.post('/edit/:id', (req,res)=>{
         let bookId = req.params.id;
-        let updatedBook = req.body;
         if(req.session.user){
-            BookData.findByIdAndUpdate(bookId, updatedBook)
-            .then(()=>{
-                res.redirect('/books');
-            })
-            .catch((err)=>{
-                console.log(err);
-                // Handle errors
+            upload(req, res, (err)=>{
+                let updatedBook = req.body;
+                let response = {};
+                response.title = 'Library Manager | Edit Book';
+                response.nav = nav.user;
+                response.profileName = req.session.user.fname + ' ' + req.session.user.sname;
+                if (err){
+                    response.book = updatedBook;
+                    response.errorMsg = err.message;
+                    response.successMsg = '';
+                    res.render('editBook',response);
+                }
+                else{
+                    if(req.file){
+                        updatedBook.img = {
+                            data: req.file.buffer,
+                            contentType: req.file.mimetype
+                        }
+                    }
+                    else{
+                        updatedBook.img = {
+                            data: '',
+                            contentType: ''
+                        }
+                    }
+                    BookData.findByIdAndUpdate(bookId, updatedBook)
+                    .then(()=>{
+                        res.redirect('/books');
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                        // Handle errors
+                    });
+                }
             });
         }
         else{
