@@ -10587,3 +10587,51 @@ section.input-section form.input-form :-ms-input-placeholder {
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+div.modal-login .section-heading {
+  color: #fff;
+}
+div.modal-login form.input-form .form-group {
+  margin-bottom: 1.5rem;
+}
+div.modal-login form.input-form .form-group input,
+div.modal-login form.input-form .form-group textarea {
+  padding: 1.25rem;
+}
+div.modal-login form.input-form .form-group input.form-control {
+  height: auto;
+}
+div.modal-login form.input-form .form-group-textarea {
+  height: 100%;
+}
+div.modal-login form.input-form .form-group-textarea textarea {
+  height: 100%;
+  min-height: 10rem;
+}
+div.modal-login form.input-form p.help-block {
+  margin: 0;
+}
+div.modal-login form.input-form .form-control:focus {
+  border-color: #fed136;
+  box-shadow: none;
+}
+div.modal-login form.input-form ::-webkit-input-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}
+div.modal-login form.input-form :-moz-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}
+div.modal-login form.input-form ::-moz-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}
+div.modal-login form.input-form :-ms-input-placeholder {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  color: #ced4da;
+}

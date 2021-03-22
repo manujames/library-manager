@@ -48,7 +48,7 @@
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Access Denied</h2>
                     <h3 class="section-subheading text-muted">Please log in to modify data.</h3>
-                    <a href="/accounts/login" class="btn btn-primary btn-xl text-uppercase" role="button">Log in</a>
+                    <a href="#loginModal" class="btn btn-primary btn-xl text-uppercase" data-toggle="modal" role="dialog">Log in</a>
                     <br>
                     <br>
                     <p class="form-notes">Don't have an account? <a href="/accounts/signup">Sign up</a></p>
@@ -71,11 +71,56 @@
                 </div>
             </div>
         </footer>
+
+        <!-- Login modal -->
+        <div class="portfolio-modal modal fade" id="loginModal" style="padding-top: 5vh;" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #298cc2; background-image: url('/images/form-bg.png');">
+                    <div class="close-modal" data-dismiss="modal"><img src="/images/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body modal-login">
+                                    <div class="container">
+                                        <br>
+                                        <div class="text-center">
+                                            <h2 class="section-heading text-uppercase">Log in</h2>
+                                            <br>
+                                        </div>
+                                        <form id="loginForm" name="loginForm" class="input-form" action="/accounts/login" method="POST" novalidate=true>
+                                            <div class="row align-items-stretch mb-5 justify-content-around">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" id="email" name="email" type="email" placeholder="Email id *"
+                                                            required="required" data-validation-required-message="Please enter your registered email." />
+                                                        <p class="help-block text-left text-danger"></p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input class="form-control" id="password" name="password" type="password" placeholder="Password *"
+                                                            required="required" data-validation-required-message="Please enter your password." />
+                                                        <p class="help-block text-left text-danger"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <button class="btn btn-theme btn-xl text-uppercase" id="loginButton" type="submit">Log in</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="/js/jqBootstrapValidation.js"></script>
+        <script src="/js/validation.js"></script>      <!-- This external js file handles validations -->
         <!-- Core theme JS-->
         <script src="/js/scripts.js"></script>        
     </body>

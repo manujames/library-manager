@@ -171,6 +171,9 @@ router = (nav)=>{
         }
     });
 
+    booksRouter.get('/delete/',(req,res)=>{
+        res.redirect('/books');
+    });
     booksRouter.post('/delete/',(req,res)=>{
         let bookId = req.body.id;
         let response = {};

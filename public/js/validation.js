@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $(function () {
-        $("#signupForm input").jqBootstrapValidation();
+        $(".input-form input, .input-form textarea").jqBootstrapValidation();
     });
+    
     if(window.errorMsg){
         $("#success").html("<div class='alert alert-danger'>");
         $("#success > .alert-danger")
@@ -29,7 +30,7 @@ $(document).ready(function(){
     }
     
     /*When clicking on inputs hide fail/success boxes */
-    $("#signupForm input").focus(function () {
+    $(".input-form input, .input-form textarea").focus(function () {
         $("#success").html("");
     });
 });

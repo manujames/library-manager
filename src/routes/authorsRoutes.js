@@ -161,6 +161,9 @@ router = (nav)=>{
         }
     });
 
+    authorsRouter.get('/delete/',(req,res)=>{
+        res.redirect('/authors');
+    });
     authorsRouter.post('/delete/',(req,res)=>{
         let authorId = req.body.id;
         let response = {};

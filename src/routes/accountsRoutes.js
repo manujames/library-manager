@@ -29,7 +29,7 @@ router = (nav)=>{
         .then((user)=>{
             if(user && user.password === inputUser.password){       // Found email id and passwords matching
                 req.session.user = user;
-                res.redirect('/');
+                res.redirect('back');
             }
             else{
                 response.nav = nav.guest;
