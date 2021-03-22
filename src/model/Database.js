@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/LibraryData', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+const mongoAtlasUsername = 'userone';
+const mongoAtlasPassword = 'userone';
+mongoose.connect(`mongodb+srv://${mongoAtlasUsername}:${mongoAtlasPassword}@fsdlibrarymanager.gfgv4.mongodb.net/LibraryData?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({

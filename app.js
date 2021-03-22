@@ -3,12 +3,14 @@ const app = express();
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');    //Save user session information to database
+const mongoAtlasUsername = 'userone';
+const mongoAtlasPassword = 'userone';
 app.use(session({
     secret: 'abcdef-12345',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false },
-    store: MongoStore.create({mongoUrl: 'mongodb://localhost:27017/LibraryData'})
+    store: MongoStore.create({mongoUrl: `mongodb+srv://${mongoAtlasUsername}:${mongoAtlasPassword}@fsdlibrarymanager.gfgv4.mongodb.net/LibraryData?retryWrites=true&w=majority`})
 }));
 
 
