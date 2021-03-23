@@ -57,9 +57,9 @@
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
                                     <%if(books[i].img.data){%>
-                                        <img class="img-fluid" src="data:image/<%=books[i].img.contentType%>;base64, <%=books[i].img.data.toString('base64')%>" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
+                                        <img class="img-fluid" loading="lazy" src="data:image/<%=books[i].img.contentType%>;base64, <%=books[i].img.data.toString('base64')%>" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
                                     <%}else{%>
-                                        <img class="img-fluid" src="" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
+                                        <img class="img-fluid" loading="lazy" src="" onerror='this.src="/images/book-default.png"' alt="" style="width:400px;height:300px" />
                                     <%}%>
                                 </a>
                                 <div class="portfolio-caption">
@@ -103,9 +103,9 @@
                                         <h2 class="text-uppercase"><%=books[i].title%></h2>
                                         <br>
                                         <%if(books[i].img.data){%>
-                                            <img class="img-fluid d-block mx-auto" src="data:image/<%=books[i].img.contentType%>;base64, <%=books[i].img.data.toString('base64')%>" alt="" onerror='this.src="/images/book-default.png"' />
+                                            <img class="img-fluid d-block mx-auto" loading="lazy" src="data:image/<%=books[i].img.contentType%>;base64, <%=books[i].img.data.toString('base64')%>" alt="" onerror='this.src="/images/book-default.png"' />
                                         <%}else{%>
-                                            <img class="img-fluid d-block mx-auto" src="" alt="" onerror='this.src="/images/book-default.png"' />
+                                            <img class="img-fluid d-block mx-auto" loading="lazy" src="" alt="" onerror='this.src="/images/book-default.png"' />
                                         <%}%>
                                         <p class="item-intro text-muted">
                                             <b>Author</b>: <%=books[i].author%>

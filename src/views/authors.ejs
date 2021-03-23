@@ -57,9 +57,9 @@
                                         <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                     </div>
                                     <%if(authors[i].img.data){%>
-                                        <img class="img-fluid" src="data:image/<%=authors[i].img.contentType%>;base64, <%=authors[i].img.data.toString('base64')%>" onerror='this.src="/images/person.png"' alt="" style="width:400px;height:300px" />
+                                        <img class="img-fluid" loading="lazy" src="data:image/<%=authors[i].img.contentType%>;base64, <%=authors[i].img.data.toString('base64')%>" onerror='this.src="/images/person.png"' alt="" style="width:400px;height:300px" />
                                     <%}else{%>
-                                        <img class="img-fluid" src="" onerror='this.src="/images/person.png"' alt="" style="width:400px;height:300px" />
+                                        <img class="img-fluid" loading="lazy" src="" onerror='this.src="/images/person.png"' alt="" style="width:400px;height:300px" />
                                     <%}%>
                                 </a>
                                 <div class="portfolio-caption">
@@ -102,9 +102,9 @@
                                         <h2 class="text-uppercase"><%=authors[i].name%></h2>
                                         <br>
                                         <%if(authors[i].img.data){%>
-                                            <img class="img-fluid" src="data:image/<%=authors[i].img.contentType%>;base64, <%=authors[i].img.data.toString('base64')%>" onerror='this.src="/images/person.png"' alt="" />
+                                            <img class="img-fluid" loading="lazy" src="data:image/<%=authors[i].img.contentType%>;base64, <%=authors[i].img.data.toString('base64')%>" onerror='this.src="/images/person.png"' alt="" />
                                         <%}else{%>
-                                            <img class="img-fluid" src="" onerror='this.src="/images/person.png"' alt="" />
+                                            <img class="img-fluid" loading="lazy" src="" onerror='this.src="/images/person.png"' alt="" />
                                         <%}%>
                                         <p class="item-intro text-muted">
                                             <b>Famouse works</b>: <%=authors[i].books%>
